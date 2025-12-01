@@ -7,6 +7,7 @@ from openai import OpenAI
 
 # Получаем токены из Environment Variables
 BOT_TOKEN = os.getenv("BOT_TOKEN")
+print(BOT_TOKEN)
 OPENAI_KEY = os.getenv("OPENAI_KEY")
 
 # Создаём объекты бота и диспетчера
