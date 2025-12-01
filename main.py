@@ -1,8 +1,9 @@
-import os
+
 import asyncio
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters import CommandStart
 from openai import OpenAI
+ipmort os
 
 # Получаем токены из Environment Variables
 BOT_TOKEN = os.getenv("BOT_TOKEN")
