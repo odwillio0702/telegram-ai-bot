@@ -1,4 +1,6 @@
 import os
+print("BOT_TOKEN:", os.getenv("BOT_TOKEN"))
+print("OPENAI_KEY:, os.getenv("OPENAI_KEY"))
 import asyncio
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters import CommandStart
