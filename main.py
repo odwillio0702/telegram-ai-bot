@@ -1,9 +1,9 @@
-
+import os
 import asyncio
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters import CommandStart
 from openai import OpenAI
-ipmort os
+
 
 # Получаем токены из Environment Variables
 BOT_TOKEN = os.getenv("BOT_TOKEN")
@@ -14,6 +14,7 @@ bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
 
 # Создаём клиент OpenAI (без proxies!)
+from openai import OpenAI
 client = OpenAI(api_key=OPENAI_KEY)
 
 # Команда /start
