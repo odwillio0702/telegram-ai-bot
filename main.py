@@ -1,48 +1,33 @@
 import os
-print("BOT_TOKEN:", os.getenv("BOT_TOKEN"))
-print("OPENAI_KEY:, os.getenv("OPENAI_KEY"))
 import asyncio
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters import CommandStart
 from openai import OpenAI
 
-# Получаем токены из Environment Variables
-BOT_TOKEN = os.getenv("BOT_TOKEN")
-OPENAI_KEY = os.getenv("OPENAI_KEY")
+# ====== ВСТАВЬ СЮДА СВОИ ТОКЕНЫ ======
+TOKEN = ":AAHIdjrrXBOaIPD6-wN17cXtxleHYOWxJiw"
+OPENAI_KEY = "k-proj-aG-g0jOcnTf5U7G8IJSzTd6-OBqaZKQYy9cZTFhpvivaJkWE406r_aADSN61TGCV4kjBtHC5GUT3BlbkFJTPLcvYuqfD7gH8BIHNuDxBSSP8S-82X59omiSFymFTHFAs_xn4jt28Ux3l-Rv1JbhRokjYFkQA"
+# =====================================
 
-# Проверка токенов (для дебага, можно потом удалить)
-if BOT_TOKEN is None:
-    raise ValueError("BOT_TOKEN не найден! Проверь Environment Variables")
-if OPENAI_KEY is None:
-    raise ValueError("OPENAI_KEY не найден! Проверь Environment Variables")
-
-# Создаём объекты бота и диспетчера
-bot = Bot(token=BOT_TOKEN)
+bot = Bot(TOKEN)
 dp = Dispatcher()
-
-# Клиент OpenAI
 client = OpenAI(api_key=OPENAI_KEY)
 
-# Команда /start
 @dp.message(CommandStart())
 async def start(message: types.Message):
-    await message.answer("Hey! I'm your AI bot. Just send me a message 😊")
+    await message.answer("👋 Yo! I'm your AI bot. Just text me anything.")
 
-# Обработка сообщений
 @dp.message()
 async def chat(message: types.Message):
-    try:
-        response = client.chat.completions.create(
-            model="gpt-4.1-mini",
-            messages=[{"role": "user", "content": message.text}]
-        )
-        answer = response.choices[0].message["content"]
-        await message.answer(answer)
-    except Exception as e:
-        await message.answer(f"Error: {str(e)}")
+    response = client.chat.completions.create(
+        model="gpt-4.1-mini",
+        messages=[{"role": "user", "content": message.text}]
+    )
+    answer = response.choices[0].message["content"]
+    await message.answer(answer)
 
-# Запуск бота
 async def main():
+    print("Bot is starting...")
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
